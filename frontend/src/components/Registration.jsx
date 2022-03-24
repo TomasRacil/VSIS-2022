@@ -6,11 +6,12 @@ const Registration = () => {
   const routes = [
     { label: "Trasa A", value: "A" },
     { label: "Trasa B", value: "B" },
+    { label: "Trasa C", value: "C" },
   ];
-  const [route, setRoute] = useState("A");
-  const handleRouteChange = (event) => {
-    setRoute(event.target.value);
-  };
+  // const [route, setRoute] = useState("B");
+  // const handleRouteChange = (event) => {
+  //   setRoute(event.target.value);
+  // };
 
   const [values, setValues] = useState({
     Route: "A",
@@ -21,7 +22,6 @@ const Registration = () => {
     Gender: "",
     Food: "",
     ClubName: "",
-    StateOfPayment: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,16 +31,18 @@ const Registration = () => {
     <Form.Group>
       <h1>REGISTRACE DO ZÁVODU TOUR DE KOSOVA</h1>
       <Form.Label>Varianta závodu</Form.Label>
-      <Form.Select onChange={handleRouteChange}>
+      <Form.Select name="Route" onChange={handleChange} value={values.Route}>
         {routes.map((option) => (
           <option value={option.value}>{option.label}</option>
         ))}
       </Form.Select>
-      {route}
+      {values.Route}
+      <br />
+      <Form.Label>Křestní jméno</Form.Label>
       <Form.Control
         type="text"
         name="Firstname"
-        placeholder="Firstname"
+        placeholder="Pepa"
         value={values.Firstname}
         onChange={handleChange}
       />
