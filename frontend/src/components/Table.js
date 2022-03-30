@@ -3,7 +3,7 @@
 import React from "react";
 import { useTable, useGlobalFilter, useAsyncDebounce, useFilters } from 'react-table'
 
-{/* Define a default UI for filtering */}
+/* Define a default UI for filtering */
 function GlobalFilter({
   preGlobalFilteredRows,
   globalFilter,
