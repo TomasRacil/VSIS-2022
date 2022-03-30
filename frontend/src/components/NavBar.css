@@ -1,0 +1,12 @@
+h1{
+text-align: center;  
+}
+.navbar{
+    margin-top: 20px;
+    margin: auto;
+    border: 1px black solid;
+}
+nav a{
+    text-align: center;
+    margin: 10px;
+}
