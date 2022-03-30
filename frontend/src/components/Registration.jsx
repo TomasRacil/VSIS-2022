@@ -29,7 +29,7 @@ const Registration = () => {
   };
   return (
     <Form.Group>
-      <h1>REGISTRACE DO ZÁVODU TOUR DE KOSOVA</h1>
+      <h1>VAAAAAGUS</h1>
       <Form.Label>Varianta závodu</Form.Label>
       <Form.Select name="Route" onChange={handleChange} value={values.Route}>
         {routes.map((option) => (
