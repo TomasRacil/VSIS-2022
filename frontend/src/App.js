@@ -9,13 +9,14 @@ import Body from './components/Body';
 import Registration from './components/Registration';
 import Header from './components/Header'
 import StartovniListina from './components/StartovniListina';
+import { Navbar } from 'react-bootstrap';
 
 function App() {
   return (
     <Router>
       <div>
       <Header></Header>
-      <nav>
+      <Navbar>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -27,7 +28,7 @@ function App() {
               <Link to="/startovnilistina">Startovni listina</Link>
             </li>
           </ul>
-        </nav>
+        </Navbar>
         <Routes>
           <Route path='/' element=
           {
