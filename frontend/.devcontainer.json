@@ -1,0 +1,27 @@
+{
+    "name": "frontend",
+    "dockerComposeFile": [
+        "../docker-compose.yml"
+    ],
+    "service": "frontend",
+    "shutdownAction": "none",
+    "settings": {},
+    "extensions": [
+        "dbaeumer.vscode-eslint",
+        "patbenatar.advanced-new-file",
+        "eamodio.gitlens",
+        "wix.vscode-import-cost",
+        "DavidAnson.vscode-markdownlint",
+        "christian-kohler.npm-intellisense",
+        "esbenp.prettier-vscode",
+        "burkeholland.simple-react-snippets",
+        "aaron-bond.better-comments",
+        "CoenraadS.bracket-pair-colorizer-2",
+        "formulahendry.auto-rename-tag",
+    ],
+    "forwardPorts": [
+        3000
+    ],
+    "workspaceFolder": "/workspace/frontend",
+    "postCreateCommand": "yarn install & yarn start",
+}
