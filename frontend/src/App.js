@@ -22,9 +22,9 @@ function App() {
             <li>
               <Link to="/registration">Regitrace</Link>
             </li>
-            {/* <li>
-              <Link to="/starttable">Startovni tabulka</Link>
-            </li> */}
+            <li>
+              <Link to="/startovnilistina">Startovni listina</Link>
+            </li>
           </ul>
         </nav>
         <Routes>
@@ -33,7 +33,7 @@ function App() {
           <Body/>
           }/>
           <Route path='registration' element={<Registration/>}/>
-          {/* <Route path='/starttable' element={<StartovniListina/>}/> */}
+          <Route path='/startovnilistina' element={<StartovniListina/>}/>
         </Routes>
       </div>
     </Router>
@@ -41,5 +41,7 @@ function App() {
     // <h1>Hello world</h1>
   );
 }
+
+
 
 export default App;
