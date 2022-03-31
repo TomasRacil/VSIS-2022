@@ -4,9 +4,9 @@ import Dropdown from "./Dropdown";
 
 const Registration = () => {
   const routes = [
-    { label: "Trasa A", value: "A" },
-    { label: "Trasa B", value: "B" },
-    { label: "Trasa C", value: "C" },
+    { label: "Trasa A (25 Km)", value: "A" },
+    { label: "Trasa B (38 Km)", value: "B" },
+    
   ];
   // const [route, setRoute] = useState("B");
   // const handleRouteChange = (event) => {
@@ -14,7 +14,7 @@ const Registration = () => {
   // };
 
   const [values, setValues] = useState({
-    Route: "A",
+    Route: " ",
     Firstname: "",
     Lastname: "",
     DOB: "",
@@ -38,16 +38,18 @@ const Registration = () => {
       </Form.Select>
       {values.Route}
       <br />
-      <Form.Label>Křestní jméno</Form.Label>
+      <Form.Label></Form.Label>
       <Form.Control
         type="text"
         name="Firstname"
-        placeholder="Pepa"
+        placeholder="Jméno"
         value={values.Firstname}
         onChange={handleChange}
       />
-      {values.Firstname}
+      {/* {values.Firstname} */}
     </Form.Group>
+     
+    
     // <div className="regitration_form">
     //   <div>
     //     <h1>REGISTRACE DO ZÁVODU TOUR DE KOSOVA</h1>
