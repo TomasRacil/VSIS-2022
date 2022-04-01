@@ -7,6 +7,7 @@ services:
       - .:/workspace:cached
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/postgres
+      FLASK_APP: manage
     command: /bin/sh -c "while sleep 1000; do :; done"
 
     networks:
