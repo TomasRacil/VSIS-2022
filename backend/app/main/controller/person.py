@@ -1,7 +1,7 @@
 from flask import request
 from flask_restx import Resource
 
-from ..util.osoba_dto import OsobaDto
+from ..dtos.osoba import OsobaDto
 from ..service.person import create_new_person, get_persons, get_person, remove_object
 
 api = OsobaDto.api
@@ -16,7 +16,9 @@ class PersonList(Resource):
     @api.marshal_list_with(_get, envelope='data')
     def get(self):
         """List all registered persons ..."""
-        return get_persons()
+        osoby=get_persons()
+        print(osoby)
+        return osoby
 
     @api.response(200, 'Osoba successfully created.')
     @api.doc('create a new person')
