@@ -5,15 +5,18 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import NavBar from './components/NavBar';
 import Body from './components/Body';
 import Registration from './components/Registration';
+import Header from './components/Header'
 import StartovniListina from './components/StartovniListina';
+
+
 
 function App() {
   return (
     <Router>
       <div>
+      <Header></Header>
       <nav>
           <ul>
             <li>
@@ -32,11 +35,12 @@ function App() {
           {
           <Body/>
           }/>
-          <Route path='registration' element={<Registration/>}/>
+          <Route path='/registration' element={<Registration/>}/>
           <Route path='/startovnilistina' element={<StartovniListina/>}/>
         </Routes>
       </div>
     </Router>
+
 
     // <h1>Hello world</h1>
   );

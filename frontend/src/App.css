@@ -1,7 +1,23 @@
 .App {
   text-align: center;
 }
-
+nav{
+  margin: 20px;
+    margin: auto;
+    border: 1px black solid;
+    background-color: aliceblue;
+    width: 100%;
+}
+ul{
+  text-align: center;
+  margin: 10px;
+  list-style-type: none;
+}
+ul li {
+  display: inline-block;
+  margin: 10px;
+  vertical-align: middle;
+}
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;
