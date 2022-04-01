@@ -11,11 +11,9 @@ class Person(db.Model):
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(64), nullable=False)
     military_ID_number = db.Column(db.Integer, unique=True, nullable=False)
-<<<<<<< HEAD
-    club.name = db. Column(db.String(40), nullable=True)
-=======
-    club_name = db.Column(db.String(40), nullable=True)
->>>>>>> a3329fa28aba5e4cf1b2c82188a6fc8fa673a89f
+    club_name = db. Column(db.String(40), nullable=True)
+
+ 
 
     # hodnost_id = db.Column(db.Integer, db.ForeignKey('hodnost.id'), nullable=False)
     # hodnost = db.relationship('Hodnost', backref=db.backref('osoby', lazy='dynamic'))
