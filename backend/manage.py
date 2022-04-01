@@ -1,5 +1,4 @@
 import os
-import click
 
 from flask_migrate import Migrate
 
@@ -11,10 +10,6 @@ app.register_blueprint(blueprint)
 app.app_context().push()
 migrate = Migrate(app, db)
 
-
-# @app.cli.command("start")
-# def start():
-#     app.run(host='0.0.0.0', port=5000)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

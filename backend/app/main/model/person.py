@@ -3,7 +3,7 @@ from .. import db
 
 class Person(db.Model):
     """
-    Model pro ukládání jenotlivých jmen, příjmení, osobní číslo, FK-hodnost, FK-kurz, FK-utvar.
+    Model pro ukládání jenotlivých jmeno, příjmení, osobní číslo
     """
     __tablename__ = "person"
 
@@ -11,6 +11,7 @@ class Person(db.Model):
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(64), nullable=False)
     military_ID_number = db.Column(db.Integer, unique=True, nullable=False)
+    club_name = db.Column(db.String(40), nullable=True)
 
     # hodnost_id = db.Column(db.Integer, db.ForeignKey('hodnost.id'), nullable=False)
     # hodnost = db.relationship('Hodnost', backref=db.backref('osoby', lazy='dynamic'))
