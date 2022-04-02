@@ -10,12 +10,12 @@ make run
 
 Inicializace DB
 ```shell
-make db-init
+make init-db
 ```
 
 Vytvoření migračního skriptu
 ```shell
-python manage.py db migrate --message 'initial database migration'
+python -m flask db migrate --message 'initial database migration'
 ```
 
 Provedení migrace na novou verzi

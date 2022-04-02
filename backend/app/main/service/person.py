@@ -6,14 +6,10 @@ from app.main.model.person import Person
 def create_new_person(data):
     person = Person.query.filter_by(military_ID_number=data['soldier_ID']).first()
     if not person:
-        try:
-            club_name = data['club_name']
-        except IndexError:
-            club_name = ''
         new_person = Person(
             first_name=data['first_name'],
             last_name=data['last_name'],
-            military_ID_number=data['soldier_ID'],
+            soldier_ID=data['soldier_ID'],
             club_name=data['club_name']
             # hodnost=Hodnost.query.filter_by(nazev=data['hodnost']).first(),
             # utvar=Utvar.query.filter_by(cislo_vu=data['utvar']).first() 
@@ -30,7 +26,7 @@ def create_new_person(data):
 
 
 def get_persons():
-    return Person.query.with_entities(Person.id, Person.first_name, Person.last_name, Person.military_ID_number, Person.club_name).all()
+    return Person.query.with_entities(Person.id, Person.first_name, Person.last_name, Person.soldier_ID, Person.club_name).all()
 
 def get_person(id):
     return Person.query.filter_by(id=id).first()

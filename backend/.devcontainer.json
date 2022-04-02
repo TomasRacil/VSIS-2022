@@ -3,7 +3,7 @@
     "dockerComposeFile": [
         "../docker-compose.yml"
     ],
-    "service": "backend",
+    "service": "api",
     "shutdownAction": "none",
     "workspaceFolder": "/workspace/backend",
     "extensions": [

@@ -1,12 +1,12 @@
 from flask import request
 from flask_restx import Resource
 
-from ..dtos.osoba import OsobaDto
+from ..dtos.person import PersonDto
 from ..service.person import create_new_person, get_persons, get_person, remove_object
 
-api = OsobaDto.api
-_post = OsobaDto.post
-_get = OsobaDto.get
+api = PersonDto.api
+_post = PersonDto.post
+_get = PersonDto.get
 
 
 
@@ -17,7 +17,6 @@ class PersonList(Resource):
     def get(self):
         """List all registered persons ..."""
         osoby=get_persons()
-        print(osoby)
         return osoby
 
     @api.response(200, 'Osoba successfully created.')
@@ -31,6 +30,11 @@ class PersonList(Resource):
 @api.route('/<id>')
 @api.param('id', 'Person identifier')
 class Person(Resource):
+    @api.doc('get person')
+    @api.marshal_with(_get)
+    def get(self, id):
+        person=get_person(id)
+        return person
     @api.doc('delete person')
     def delete(self, id):
         person = get_person(id)
