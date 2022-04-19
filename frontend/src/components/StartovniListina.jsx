@@ -1,45 +1,89 @@
-import React from "react";
-import Table, {SelectColumnFilter} from './Table'
+import { useMemo, useEffect, useState } from "react";
+import Table, { SelectColumnFilter } from "./Table";
 
-function StartovniListina() {
-    const columns = React.useMemo(
-      () => [
-        {
-          Header: "Name",
-          accessor: "name",
-        },
-        {
-          Header: "Title",
-          accessor: "title",
-        },
-        {
-          Header: "Status",
-          accessor: "status",
-        },
-        {
-          Header: "Trasa",
-          accessor: "trasa",
-        },
-        {
-          Header: "Zaplaceno",
-          accessor: 'zaplaceno',
-          Filter: SelectColumnFilter, 
-          filter: 'includes', 
-        },
-      ]
-      );
-  
-    const data = React.useMemo(() => getData(), []);
-  
-    return (
-      <>
-        <h1>Startovní listina závodu</h1>
+const StartovniListina = () => {
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
+  const [persons, setPersons] = useState();
+
+  const columns = useMemo(() => [
+    {
+      Header: "Name",
+      accessor: "name",
+    },
+    {
+      Header: "Title",
+      accessor: "title",
+    },
+    {
+      Header: "Status",
+      accessor: "status",
+    },
+    {
+      Header: "Trasa",
+      accessor: "trasa",
+    },
+    {
+      Header: "Zaplaceno",
+      accessor: "zaplaceno",
+      Filter: SelectColumnFilter,
+      filter: "includes",
+    },
+  ]);
+
+  useEffect(() => {
+    const abortControler = new AbortController();
+
+    setTimeout(() => {
+      fetch("/_api/person/")
+        .then((res) => {
+          if (!res.ok) {
+            throw Error("could not fetch the data for that source");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          setPersons(data.data);
+          //setOsoby(data.data);
+          setIsPending(false);
+          setError(null);
+        })
+        .catch((err) => {
+          if (err.name === "AbortError") {
+            console.log("fetch aborted");
+          } else {
+            console.log(err.message);
+            setIsPending(false);
+            setError(err.message);
+          }
+        });
+    }, 3000);
+
+    return () => abortControler.abort();
+  }, []);
+
+  const data = useMemo(() => getData(), []);
+
+  return (
+    <>
+      <h1>Startovní listina závodu</h1>
+      {error}
+      {isPending}
+      {persons && (
         <div>
-          <Table columns={columns} data={data} />
+          {persons.map((person) => (
+            <div key={person.id}>
+              <h3>{person.first_name}</h3>
+              <h3>{person.last_name}</h3>
+              <h3>{person.club_name}</h3>
+            </div>
+          ))}
         </div>
-      </>
-    );
-  }
+      )}
+    </>
+  );
+};
 
 const getData = () => [
   {
