@@ -1,7 +1,7 @@
 from flask import request
 from flask_restx import Resource
 
-from ..util.osoba_dto import OsobaDto
+from ..dtos.osoba_dto import OsobaDto
 from ..service.person import create_new_person, get_persons, get_person, remove_object
 
 api = OsobaDto.api
