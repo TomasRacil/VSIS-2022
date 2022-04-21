@@ -3,14 +3,15 @@ from .. import db
 
 class Person(db.Model):
     """
-    Model pro ukládání jenotlivých jmen, příjmení, osobní číslo, FK-hodnost, FK-kurz, FK-utvar.
+    Model pro ukládání jenotlivých jmeno, příjmení, osobní číslo
     """
     __tablename__ = "person"
 
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(64), nullable=False)
-    military_ID_number = db.Column(db.Integer, unique=True, nullable=False)
+    soldier_ID = db.Column(db.Integer, unique=True, nullable=False)
+    club_name = db.Column(db.String(40), nullable=True)
 
     # hodnost_id = db.Column(db.Integer, db.ForeignKey('hodnost.id'), nullable=False)
     # hodnost = db.relationship('Hodnost', backref=db.backref('osoby', lazy='dynamic'))
@@ -24,4 +25,4 @@ class Person(db.Model):
     #     self.osobni_cislo=osobni_cislo
 
     def __repr__(self):
-        return f"jmeno: {self.jmeno} prijmeni: {self.prijmeni} osobni_cislo: {self.osobni_cislo}"
+        return f"jmeno: {self.first_name} prijmeni: {self.last_name} osobni_cislo: {self.military_ID_number}"

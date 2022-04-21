@@ -1,0 +1,6 @@
+GET http://api:5000/person HTTP/1.4
+Content-Type: application/json
+
+###
+GET http://api:5000/person/1 HTTP/1.4
+Content-Type: application/json

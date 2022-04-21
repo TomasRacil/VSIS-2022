@@ -1,12 +1,16 @@
 from flask import request
 from flask_restx import Resource
 
+<<<<<<< HEAD
 from ..dtos.osoba_dto import OsobaDto
+=======
+from ..dtos.person import PersonDto
+>>>>>>> 348f722d43e33c1d8ff862712d90cddc3ee5a6a3
 from ..service.person import create_new_person, get_persons, get_person, remove_object
 
-api = OsobaDto.api
-_post = OsobaDto.post
-_get = OsobaDto.get
+api = PersonDto.api
+_post = PersonDto.post
+_get = PersonDto.get
 
 
 
@@ -16,7 +20,8 @@ class PersonList(Resource):
     @api.marshal_list_with(_get, envelope='data')
     def get(self):
         """List all registered persons ..."""
-        return get_persons()
+        osoby=get_persons()
+        return osoby
 
     @api.response(200, 'Osoba successfully created.')
     @api.doc('create a new person')
@@ -29,6 +34,11 @@ class PersonList(Resource):
 @api.route('/<id>')
 @api.param('id', 'Person identifier')
 class Person(Resource):
+    @api.doc('get person')
+    @api.marshal_with(_get)
+    def get(self, id):
+        person=get_person(id)
+        return person
     @api.doc('delete person')
     def delete(self, id):
         person = get_person(id)
