@@ -11,10 +11,17 @@ import Header from './components/Header'
 import StartovniListina from './components/StartovniListina';
 
 
-
 function App() {
+  function test() {
+    fetch("/_api/person/")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => console.log(data));
+  }
   return (
     <Router>
+      <button onClick={test}>test</button>
       <div>
       <Header></Header>
       <nav>

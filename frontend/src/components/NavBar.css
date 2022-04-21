@@ -1,14 +1,16 @@
-h1{
-text-align: center;  
-}
-.navbar{
+
+nav{
     margin-top: 20px;
     margin: auto;
     border: 1px black solid;
     background-color: aquamarine;
+    position: fixed;
 }
-ul li{
+ul{
     text-align: center;
     margin: 10px;
-    l
+    list-style-type: none;
+}
+ul li {
+    display: inline-block;
 }

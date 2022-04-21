@@ -1,19 +1,20 @@
 import {Accordion, Card, Button} from 'react-bootstrap'
 import UO from "./Logo_of_UO.svg.png"
-import Flag from "./Flag_of_Kosovo.svg.png"
+import Flag from "./logo_of_TDK.png"
 const Body = () => {
 
   return (<div>
-<h1>Tour de kosova</h1>
+<h1>Tour de kosová</h1>
 <Card className="text-center">
   <Card.Header>Mapa</Card.Header>
   <Card.Body>
-    <Card.Title>Tour de Kosovo</Card.Title>
+    <Card.Title>Tour de Kosova</Card.Title>
     <Card.Text>
-      Zde si prohlédněte mapku celého závodu
+      Níže si prohlédněte obě trasy závodu
     </Card.Text>
-    <center><img src={Flag} class="center" alt="Tour de Kosovo" width="150" height="150" ></img></center>
-    <Button variant="primary" a href="https://www.google.com/maps/d/viewer?ie=UTF8&hl=en&msa=0&ll=42.65012200000002%2C20.742188&spn=3.232133%2C3.713379&z=6&source=embed&mid=1QA-ent10r6q_RRp7vKXTOKzrlV8"> Mapa</Button>
+    <center><img src={Flag} class="center" alt="Tour de Kosova" width="500" height="300" ></img></center>
+    <Button variant="primary" a href="https://frame.mapy.cz/s/botonacucu">Trasa A</Button>
+    <Button variant="primary" a href="https://frame.mapy.cz/s/desucucogo">Trasa B</Button>
   </Card.Body>
 </Card>
 
@@ -22,25 +23,21 @@ const Body = () => {
   <Accordion.Item eventKey="0">
     <Accordion.Header>O závodu</Accordion.Header>
     <Accordion.Body>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
+    Obě trasy závodu vás provedou skrze malebnou rekreační oblast Kosová. Po cestě narazíte na několik přírodních rybníčků.
+    Závod bude měřen profesionální časomírou. Každý závodník na místě obdrží čip. 
+    Zázemí závodu poskytuje areál letního koupaliště v Moravských Budějovicích, kam budou mít všichni závodníci i jejich doprovod vstup zdarma. 
+    Na koupališti můžete využít bazény, sportoviště, stánky s občerstvením, šatny, sprchy i toalety.
     </Accordion.Body>
   </Accordion.Item>
   <Accordion.Item eventKey="1">
-    <Accordion.Header>Cíl závodu</Accordion.Header>
+    <Accordion.Header>Pravidla závodu</Accordion.Header>
     <Accordion.Body>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
+    Všichni přihlášení startují na vlastní nebezpečí včetně posouzení připravenosti na závod.
+    Pro závod je povoleno trekingové a horské kolo dle vlastního uvážení (elektrokola jsou zakázána).
+    Závodník musí být v každém případě vybaven přilbou, kterou musí mít nasazenou po celou dobu závodu.
+    Trasa vede i po veřejných komunikacích za plného provozu. Účastníci jsou povinni dbát pravidel silničního provozu, pokynů PČR a pořadatelů.
+    Závodu se může zúčastnit každý, kdo dosáhl věku 15 let (závodníci mladší 18 let přinesou v den závodu POTVRZENÍ ZÁKONNÉHO ZÁSTUPCE, že se mohou zúčastnit závodu).
+    Každý závodník je povinen ctít ETICKÝ KODEX ZÁVODU. Řídíme se heslem „Není důležité vyhrát, ale zúčastnit se."
     </Accordion.Body>
   </Accordion.Item>
 </Accordion>
