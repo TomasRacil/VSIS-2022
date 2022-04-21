@@ -8,11 +8,13 @@ class Person(db.Model):
     __tablename__ = "person"
 
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
+    route_name = db.Column(db., nullable=False)
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(64), nullable=False)
-    soldier_ID = db.Column(db.Integer, unique=True, nullable=False)
+    birth_date = db.Column(db.String(12), nullable=False)
     club_name = db.Column(db.String(40), nullable=True)
-
+    food_name = db.Column(db.String(40), nullable=True)
+    shirt_size_name = db.Column(db.String(40), nullable=True)
     # hodnost_id = db.Column(db.Integer, db.ForeignKey('hodnost.id'), nullable=False)
     # hodnost = db.relationship('Hodnost', backref=db.backref('osoby', lazy='dynamic'))
 
