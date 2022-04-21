@@ -8,7 +8,6 @@ class Person(db.Model):
     __tablename__ = "person"
 
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
-    route_name = db.Column(db., nullable=False)
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(64), nullable=False)
     club_name = db.Column(db.String(40), nullable=True)
