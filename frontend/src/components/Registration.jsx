@@ -1,25 +1,25 @@
 import { useState } from "react";
-import { Form, Button} from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 //import Dropdown from "./Dropdown";
 
 const Registration = () => {
   const routes = [
-    { label: "Trasa", value: "Z" },
-    { label: "Trasa A (25 Km)", value: "A" },
-    { label: "Trasa B (38 Km)", value: "B" },
+    { label: "Trasa", value: "" },
+    { label: "Trasa A (25 Km)", value: true },
+    { label: "Trasa B (38 Km)", value: false },
   ];
   const foods = [
-    { label: "Jídlo", value: "Z" },
-      { label: "Řízek + salát", value: "C" },
-      { label: "Guláš, chléb", value: "D" },
-    ];
-    const shirts = [
-      { label: "Velikost trika", value: "Z" },
-      { label: "S", value: "E" },
-      { label: "M", value: "F" },
-      { label: "L", value: "G" },
-      { label: "XL", value: "H" },
-    ];
+    { label: "Jídlo", value: "" },
+    { label: "Řízek + salát", value: true },
+    { label: "Guláš, chléb", value: false },
+  ];
+  const shirts = [
+    { label: "Velikost trika", value: "" },
+    { label: "S", value: 1 },
+    { label: "M", value: 2 },
+    { label: "L", value: 3 },
+    { label: "XL", value: 4 },
+  ];
   // const [route, setRoute] = useState("B");
   // const handleRouteChange = (event) => {
   //   setRoute(event.target.value);
@@ -39,6 +39,49 @@ const Registration = () => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
+
+  function changeNaming() {
+    const person = {
+      first_name: values.Firstname,
+      last_name: values.Lastname,
+      club_name: values.ClubName,
+      email: values.Email,
+      route: values.Route === "true",
+      food: values.Food === "true",
+      birth_date: values.DOB,
+      shirt: Number(values.Shirt),
+    };
+    return person;
+  }
+
+  function submitForm() {
+    console.log(values);
+    // fetch("/_api/person/")
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => console.log(data));
+  }
+
+  const handleSubmit = () => {
+    // e.preventDefault();
+    // const user = { email, username, password };
+
+    // setIsPending(true);
+    const person = changeNaming();
+    fetch("/_api/person/", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8", // Indicates the content
+      },
+      body: JSON.stringify(person),
+    }).then((res) => {
+      console.log("New user added", res);
+      // setIsPending(false);
+      // history.push("/");
+    });
+  };
+
   return (
     <Form>
       <Form.Group>
@@ -60,7 +103,6 @@ const Registration = () => {
           placeholder="Jméno"
           value={values.Firstname}
           onChange={handleChange}
-          
         />
       </Form.Group>
       <Form.Group>
@@ -76,7 +118,7 @@ const Registration = () => {
       <Form.Group>
         <Form.Label></Form.Label>
         <Form.Control
-          type="text"
+          type="date"
           name="DOB"
           placeholder="Datum Narození"
           value={values.DOB}
@@ -106,23 +148,25 @@ const Registration = () => {
       <Form.Label></Form.Label>
       <Form.Group>
         <Form.Select name="Food" onChange={handleChange} value={values.Food}>
-        {foods.map((option) => (
-          <option value={option.value}>{option.label}</option>
-        ))}
+          {foods.map((option) => (
+            <option value={option.value}>{option.label}</option>
+          ))}
         </Form.Select>
         {/* {values.Food} */}
       </Form.Group>
       <Form.Label></Form.Label>
       <Form.Group>
         <Form.Select name="Shirt" onChange={handleChange} value={values.Shirt}>
-        {shirts.map((option) => (
-          <option value={option.value}>{option.label}</option>
-        ))}
+          {shirts.map((option) => (
+            <option value={option.value}>{option.label}</option>
+          ))}
         </Form.Select>
         {/* {values.Shirt} */}
       </Form.Group>
       <Form.Group>
-      <Button variant="primary" a href="https://miro.medium.com/max/1280/1*BMdNGcek6kqR5J5pwjQwAw.png" target="blank">Odeslat</Button>
+        <Button variant="primary" onClick={handleSubmit}>
+          Odeslat
+        </Button>
       </Form.Group>
     </Form>
   );

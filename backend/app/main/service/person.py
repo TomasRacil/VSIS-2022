@@ -7,9 +7,10 @@ import datetime
 # from app.main.model.utvar import Utvar
 
 def create_new_person(data):
-    pattern=r'^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$'
-    # print(re.search(data['email'],pattern))
-    if bool(re.search(data['email'],pattern)):
+    # pattern=r'^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$'
+    # print(re.search(pattern,data['email']))
+    # if bool(re.search(pattern, data['email'])):
+    if True:
         new_person = Person(
             first_name=data['first_name'],
             last_name=data['last_name'],
@@ -17,7 +18,7 @@ def create_new_person(data):
             route = data['route'],
             food = data['food'],
             shirt = data['shirt'],
-            birth_date=datetime.datetime.strptime(data['birth_date'], "%d.%m.%Y").date(),
+            birth_date=datetime.datetime.strptime(data['birth_date'], "%Y-%m-%d").date(),
             email=data['email']
         )
 
