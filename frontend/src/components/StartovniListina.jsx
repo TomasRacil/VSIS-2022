@@ -1,5 +1,5 @@
 import { useMemo, useEffect, useState } from "react";
-import Table, { SelectColumnFilter } from "./Table";
+import { SelectColumnFilter } from "./Table";
 
 const StartovniListina = () => {
   const [isPending, setIsPending] = useState(true);

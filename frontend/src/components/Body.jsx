@@ -50,6 +50,9 @@ const Body = () => {
     </Card.Text>
     <center><img src={UO} class="center" alt="Tour de Kosovo" width="150" height="150" ></img></center>
     <Button variant="primary" a href="https://www.unob.cz/Stranky/default.aspx"> Oficiální stránky partnera</Button>
+    <Card.Title>Sponzoři dlouhodobě spolupracující s UO</Card.Title>
+    <Button variant="primary" a href="https://miro.medium.com/max/1280/1*BMdNGcek6kqR5J5pwjQwAw.png" target="blank">NUKIB</Button>
+    <Button variant="primary" a href="http://thumbpress.com/wp-content/uploads/2012/02/Hackers.jpg" target="blank">VeKySIO</Button>
   </Card.Body>
   <Card.Footer className="text-muted"></Card.Footer>
 </Card>
