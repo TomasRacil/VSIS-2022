@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Form } from "react-bootstrap";
-import Dropdown from "./Dropdown";
+import { Form, Button} from "react-bootstrap";
+//import Dropdown from "./Dropdown";
 
 const Registration = () => {
   const routes = [
@@ -88,7 +88,7 @@ const Registration = () => {
         <Form.Control
           type="text"
           name="Email"
-          placeholder="e-mail"
+          placeholder="e-mailová adresa"
           value={values.Email}
           onChange={handleChange}
         />
@@ -98,7 +98,7 @@ const Registration = () => {
         <Form.Control
           type="text"
           name="ClubName"
-          placeholder="Klub"
+          placeholder="název klubu (volitelné)"
           value={values.ClubName}
           onChange={handleChange}
         />
@@ -120,6 +120,9 @@ const Registration = () => {
         ))}
         </Form.Select>
         {/* {values.Shirt} */}
+      </Form.Group>
+      <Form.Group>
+      <Button variant="primary" a href="https://miro.medium.com/max/1280/1*BMdNGcek6kqR5J5pwjQwAw.png" target="blank">Odeslat</Button>
       </Form.Group>
     </Form>
   );
