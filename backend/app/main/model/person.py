@@ -14,8 +14,8 @@ class Person(db.Model):
     route = db.Column(db.Boolean, nullable=False)
     food = db.Column(db.Boolean, nullable=False)
     shirt = db.Column(db.SmallInteger, nullable=False)
-    birth_date=db.Column(db.Date, nullable=False)
-    email=db.Column(db.String(256), nullable=False)
+    birth_date = db.Column(db.Date, nullable=False)
+    email = db.Column(db.String(256), nullable=False)
 
     # hodnost_id = db.Column(db.Integer, db.ForeignKey('hodnost.id'), nullable=False)
     # hodnost = db.relationship('Hodnost', backref=db.backref('osoby', lazy='dynamic'))
