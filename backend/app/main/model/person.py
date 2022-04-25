@@ -29,4 +29,4 @@ class Person(db.Model):
     #     self.osobni_cislo=osobni_cislo
 
     def __repr__(self):
-        return f"jmeno: {self.first_name} prijmeni: {self.last_name} osobni_cislo: {self.military_ID_number}"
+        return f"jmeno: {self.first_name} prijmeni: {self.last_name}"

@@ -1,11 +1,15 @@
+import re
 from app.main import db
 from app.main.model.person import Person
+import datetime
+
 # from app.main.model.hodnost import Hodnost
 # from app.main.model.utvar import Utvar
 
 def create_new_person(data):
-    person = Person.query.filter_by(military_ID_number=data['soldier_ID']).first()
-    if not person:
+    pattern=r'^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$'
+    # print(re.search(data['email'],pattern))
+    if bool(re.search(data['email'],pattern)):
         new_person = Person(
             first_name=data['first_name'],
             last_name=data['last_name'],
@@ -26,11 +30,16 @@ def create_new_person(data):
             'message': 'Person added.'
         }
         return response_object, 200
-        #return generate_token(new_user)
+    else:
+        response_object = {
+            'status': 'failure',
+            'message': 'Email adress not valid'
+        }
+        return response_object, 400
 
 
 def get_persons():
-    return Person.query.with_entities(Person.id, Person.first_name, Person.last_name, Person.soldier_ID, Person.club_name).all()
+    return Person.query.all()
 
 def get_person(id):
     return Person.query.filter_by(id=id).first()
