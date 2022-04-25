@@ -10,9 +10,12 @@ class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(64), nullable=False)
-    soldier_ID = db.Column(db.Integer, unique=True, nullable=False)
     club_name = db.Column(db.String(40), nullable=True)
-
+    route = db.Column(db.Boolean, nullable=False)
+    food = db.Column(db.Boolean, nullable=False)
+    shirt = db.Column(db.SmallInteger, nullable=False)
+    birth_date = db.Column(db.Date, nullable=False)
+    email = db.Column(db.String(256), nullable=False)
 
     # hodnost_id = db.Column(db.Integer, db.ForeignKey('hodnost.id'), nullable=False)
     # hodnost = db.relationship('Hodnost', backref=db.backref('osoby', lazy='dynamic'))

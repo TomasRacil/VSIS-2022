@@ -9,8 +9,12 @@ def create_new_person(data):
         new_person = Person(
             first_name=data['first_name'],
             last_name=data['last_name'],
-            soldier_ID=data['soldier_ID'],
-            club_name=data['club_name']
+            club_name=data['club_name'],
+            route = data['route'],
+            food = data['food'],
+            shirt = data['shirt'],
+            birth_date = data['birth_date'],
+            email = data['email']
             # hodnost=Hodnost.query.filter_by(nazev=data['hodnost']).first(),
             # utvar=Utvar.query.filter_by(cislo_vu=data['utvar']).first() 
         )
