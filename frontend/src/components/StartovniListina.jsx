@@ -8,24 +8,24 @@ const StartovniListina = () => {
 
   const columns = useMemo(() => [
     {
-      Header: "Name",
-      accessor: "name",
+      Header: "Jméno",
+      accessor: "first_name",
     },
     {
-      Header: "Title",
-      accessor: "title",
+      Header: "Příjmení",
+      accessor: "last_name",
     },
     {
-      Header: "Status",
-      accessor: "status",
+      Header: "Klub",
+      accessor: "club_name",
+    },
+    {
+      Header: "Ročník",
+      accessor: "birth_date",
     },
     {
       Header: "Trasa",
-      accessor: "trasa",
-    },
-    {
-      Header: "Zaplaceno",
-      accessor: "zaplaceno",
+      accessor: "route",
       Filter: SelectColumnFilter,
       filter: "includes",
     },
@@ -77,6 +77,8 @@ const StartovniListina = () => {
               <h3>{person.first_name}</h3>
               <h3>{person.last_name}</h3>
               <h3>{person.club_name}</h3>
+              <h3>{person.birth_date}</h3>
+              <h3>{person.route}</h3>
             </div>
           ))}
         </div>
@@ -86,65 +88,6 @@ const StartovniListina = () => {
 };
 
 const getData = () => [
-  {
-    name: "Jeník Kubalek",
-    email: "jan.kubalek@unob.cz",
-    title: "Microtuss",
-    department: "UNOB",
-    status: "Zaplaceno",
-    Trasa: "Admin",
-    imgUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Cody Fisher",
-    email: "cody.fisher@example.com",
-    title: "Product Directives Officer",
-    department: "Intranet",
-    status: "Active",
-    Trasa: "Owner",
-    imgUrl:
-      "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Esther Howard",
-    email: "esther.howard@example.com",
-    title: "Forward Response Developer",
-    department: "Directives",
-    status: "Active",
-    Trasa: "Member",
-    imgUrl:
-      "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jenny Wilson",
-    email: "jenny.wilson@example.com",
-    title: "Central Security Manager",
-    department: "Program",
-    status: "Active",
-    Trasa: "Member",
-    imgUrl:
-      "https://images.unsplash.com/photo-1498551172505-8ee7ad69f235?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Kristin Watson",
-    email: "kristin.watson@example.com",
-    title: "Lean Implementation Liaison",
-    department: "Mobility",
-    status: "Active",
-    Trasa: "Admin",
-    imgUrl:
-      "https://images.unsplash.com/photo-1532417344469-368f9ae6d187?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Cameron Williamson",
-    email: "cameron.williamson@example.com",
-    title: "Internal Applications Engineer",
-    department: "Security",
-    status: "Active",
-    Trasa: "Member",
-    imgUrl:
-      "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
+  
 ];
 export default StartovniListina;

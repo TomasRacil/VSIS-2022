@@ -4,17 +4,17 @@ import { Form, Button } from "react-bootstrap";
 
 const Registration = () => {
   const routes = [
-    { label: "Trasa", value: "" },
+    { label: "Vyber trasu", value: "" },
     { label: "Trasa A (25 Km)", value: true },
     { label: "Trasa B (38 Km)", value: false },
   ];
   const foods = [
-    { label: "Jídlo", value: "" },
+    { label: "Vyber jídlo", value: "" },
     { label: "Řízek + salát", value: true },
     { label: "Guláš, chléb", value: false },
   ];
   const shirts = [
-    { label: "Velikost trika", value: "" },
+    { label: "Vyber velikost trika", value: "" },
     { label: "S", value: 1 },
     { label: "M", value: 2 },
     { label: "L", value: 3 },
@@ -86,16 +86,11 @@ const Registration = () => {
     <Form>
       <Form.Group>
         <h1>REGISTRACE DO ZÁVODU TOUR DE KOSOVA</h1>
-        <Form.Label>Varianta závodu</Form.Label>
-        <Form.Select name="Route" onChange={handleChange} value={values.Route}>
-          {routes.map((option) => (
-            <option value={option.value}>{option.label}</option>
-          ))}
-        </Form.Select>
       </Form.Group>
       {/* {values.Route} */}
       <br />
       <Form.Group>
+      <Form.Label><h3>Základní údaje</h3></Form.Label>
         <Form.Label></Form.Label>
         <Form.Control
           type="text"
@@ -145,8 +140,16 @@ const Registration = () => {
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Label></Form.Label>
       <Form.Group>
+      <Form.Label><h3>Výběr trasy, jídla a trička</h3></Form.Label>
+        <Form.Select name="Route" onChange={handleChange} value={values.Route}>
+          {routes.map((option) => (
+            <option value={option.value}>{option.label}</option>
+          ))}
+        </Form.Select>
+      </Form.Group>
+      <Form.Group>
+      <Form.Label></Form.Label>
         <Form.Select name="Food" onChange={handleChange} value={values.Food}>
           {foods.map((option) => (
             <option value={option.value}>{option.label}</option>

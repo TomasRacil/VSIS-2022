@@ -19,6 +19,7 @@ function App() {
       })
       .then((data) => console.log(data));
   }
+
   return (
     <Router>
       <button onClick={test}>test</button>
