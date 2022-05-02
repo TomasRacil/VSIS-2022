@@ -82,6 +82,7 @@ function Table({ columns, data }) {
         })}
       </tbody>
     </table>
+    
     <div>
         <pre>
           <code>{JSON.stringify(state, null, 2)}</code>

@@ -67,6 +67,7 @@ const StartovniListina = () => {
 
   return (
     <>
+    
       <h1>Startovní listina závodu</h1>
       {error}
       {isPending}
