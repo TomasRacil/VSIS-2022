@@ -1,15 +1,17 @@
-import { useMemo, useEffect, useState } from "react";
-import { SelectColumnFilter } from "./Table";
+import { useEffect, useState } from "react";
+import Table, { SelectColumnFilter } from "./Table";
 
 const StartovniListina = () => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
   const [persons, setPersons] = useState();
 
-  const columns = useMemo(() => [
+  const columns = [
     {
       Header: "Jméno",
       accessor: "first_name",
+      Filter: SelectColumnFilter,
+      filter: "include",
     },
     {
       Header: "Příjmení",
@@ -29,7 +31,7 @@ const StartovniListina = () => {
       Filter: SelectColumnFilter,
       filter: "includes",
     },
-  ]);
+  ];
 
   useEffect(() => {
     const abortControler = new AbortController();
@@ -51,7 +53,7 @@ const StartovniListina = () => {
         })
         .catch((err) => {
           if (err.name === "AbortError") {
-            console.log("fetch aborted");
+            //console.log("fetch aborted");
           } else {
             console.log(err.message);
             setIsPending(false);
@@ -63,13 +65,12 @@ const StartovniListina = () => {
     return () => abortControler.abort();
   }, []);
 
-  const data = useMemo(() => getData(), []);
+  // const data = useMemo(() => getData(), []);
 
   return (
     <>
-    
       <h1>Startovní listina závodu</h1>
-      {error}
+      {/* {error}
       {isPending}
       {persons && (
         <div>
@@ -83,12 +84,23 @@ const StartovniListina = () => {
             </div>
           ))}
         </div>
-      )}
+      )} */}
+      {persons && <Table columns={columns} data={persons} />}
     </>
   );
 };
 
-const getData = () => [
-  
-];
+// const getData = () => {
+//   fetch("/_api/person/")
+//     .then((res) => {
+//       if (!res.ok) {
+//         throw Error("could not fetch the data for that source");
+//       }
+//       return res.json();
+//     })
+//     .then((data) => {
+//       console.log(data.data);
+//       return data.data;
+//     });
+// };
 export default StartovniListina;
