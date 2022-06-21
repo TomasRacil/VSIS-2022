@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
+import React from 'react';
+
+
 //import Dropdown from "./Dropdown";
 
 const Registration = () => {
@@ -25,7 +28,7 @@ const Registration = () => {
   //   setRoute(event.target.value);
   // };
 
-  const [values, setValues] = useState({
+  const [formValues, setformValues] = useState({
     Route: " ",
     Firstname: "",
     Lastname: "",
@@ -37,46 +40,84 @@ const Registration = () => {
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+    setformValues({ ...formValues, [name]: value });
   };
-
+   
   function changeNaming() {
     const person = {
-      first_name: values.Firstname,
-      last_name: values.Lastname,
-      club_name: values.ClubName,
-      email: values.Email,
-      route: values.Route === "true",
-      food: values.Food === "true",
-      birth_date: values.DOB,
-      shirt: Number(values.Shirt),
+      first_name: formValues.Firstname,
+      last_name: formValues.Lastname,
+      club_name: formValues.ClubName,
+      email: formValues.Email,
+      route: formValues.Route === "true",
+      food: formValues.Food === "true",
+      birth_date: formValues.DOB,
+      shirt: Number(formValues.Shirt),
     };
     return person;
   }
 
   function submitForm() {
-    console.log(values);
+    console.log(formValues);
+
+    
     // fetch("/_api/person/")
     //   .then((res) => {
     //     return res.json();
     //   })
     //   .then((data) => console.log(data));
   }
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState (false);
+  const [buttontext, setButtonText] = useState('Odeslat');
 
-  const handleSubmit = () => {
-    // e.preventDefault();
-    // const user = { email, username, password };
+  useEffect (() => {
+    console.log(formErrors);
+    if (Object.keys(formErrors).lenght === 0 && isSubmit) {
+      console.log(formValues);
+    }
+  }, [formErrors]);
+  const validate = (values => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if(!values.Firstname) {
+      errors.Firstname = "Jméno je vyžadováno!";
+    }
+    if(!values.Lastname) {
+      errors.Lastname = "Přijmení je vyžadováno!";
+    }
+    if(!values.Email) {
+      errors.Email = "Email je vyžadován!";
+    // }
+    //  else if (!regex.test(values.Email)) {
+    //   errors.Email = "This is not a valid email format!";//
+     }
+    if(!values.ClubName) {
+      errors.ClubName = "Jméno klubu je vyžadováno!";
+    }
+    return errors;
+  })
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+      // e.preventDefault();
+      // const user = { email, username, password };
+      
+      // setIsPending(true);
+      
+      const person = changeNaming();
+      fetch("/_api/person/", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8", // Indicates the content
+        },
+        body: JSON.stringify(person),
+      }).then((res) => {
+        console.log("New user added", res);
 
-    // setIsPending(true);
-    const person = changeNaming();
-    fetch("/_api/person/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8", // Indicates the content
-      },
-      body: JSON.stringify(person),
-    }).then((res) => {
-      console.log("New user added", res);
+        setButtonText('Odeslano');
+      
       // setIsPending(false);
       // history.push("/");
     });
@@ -96,7 +137,8 @@ const Registration = () => {
           type="text"
           name="Firstname"
           placeholder="Jméno"
-          value={values.Firstname}
+          required
+          value={formValues.Firstname}
           onChange={handleChange}
         />
       </Form.Group>
@@ -105,8 +147,9 @@ const Registration = () => {
         <Form.Control
           type="text"
           name="Lastname"
+          required
           placeholder="Přijmení"
-          value={values.Lastname}
+          value={formValues.Lastname}
           onChange={handleChange}
         />
       </Form.Group>
@@ -116,7 +159,7 @@ const Registration = () => {
           type="date"
           name="DOB"
           placeholder="Datum Narození"
-          value={values.DOB}
+          value={formValues.DOB}
           onChange={handleChange}
         />
       </Form.Group>
@@ -126,7 +169,7 @@ const Registration = () => {
           type="text"
           name="Email"
           placeholder="e-mailová adresa"
-          value={values.Email}
+          value={formValues.Email}
           onChange={handleChange}
         />
       </Form.Group>
@@ -136,13 +179,13 @@ const Registration = () => {
           type="text"
           name="ClubName"
           placeholder="název klubu (volitelné)"
-          value={values.ClubName}
+          value={formValues.ClubName}
           onChange={handleChange}
         />
       </Form.Group>
       <Form.Group>
       <Form.Label><h3>Výběr trasy, jídla a trička</h3></Form.Label>
-        <Form.Select name="Route" onChange={handleChange} value={values.Route}>
+        <Form.Select name="Route" onChange={handleChange} value={formValues.Route}>
           {routes.map((option) => (
             <option value={option.value}>{option.label}</option>
           ))}
@@ -150,7 +193,7 @@ const Registration = () => {
       </Form.Group>
       <Form.Group>
       <Form.Label></Form.Label>
-        <Form.Select name="Food" onChange={handleChange} value={values.Food}>
+        <Form.Select name="Food" onChange={handleChange} value={formValues.Food}>
           {foods.map((option) => (
             <option value={option.value}>{option.label}</option>
           ))}
@@ -159,7 +202,7 @@ const Registration = () => {
       </Form.Group>
       <Form.Label></Form.Label>
       <Form.Group>
-        <Form.Select name="Shirt" onChange={handleChange} value={values.Shirt}>
+        <Form.Select name="Shirt" onChange={handleChange} value={formValues.Shirt}>
           {shirts.map((option) => (
             <option value={option.value}>{option.label}</option>
           ))}
@@ -168,7 +211,7 @@ const Registration = () => {
       </Form.Group>
       <Form.Group>
         <Button variant="primary" onClick={handleSubmit}>
-          Odeslat
+          {buttontext}
         </Button>
       </Form.Group>
     </Form>
