@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import React from 'react';
-
-
+import Popup from './Popup';
 //import Dropdown from "./Dropdown";
 
 const Registration = () => {
@@ -57,6 +55,7 @@ const Registration = () => {
     return person;
   }
 
+  
   function submitForm() {
     console.log(formValues);
 
@@ -67,6 +66,8 @@ const Registration = () => {
     //   })
     //   .then((data) => console.log(data));
   }
+  const [isOpen, setIsOpen] = useState(false);
+  const togglePopup = () => { setIsOpen(!isOpen) };
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState (false);
   const [buttontext, setButtonText] = useState('Odeslat');
@@ -115,8 +116,8 @@ const Registration = () => {
         body: JSON.stringify(person),
       }).then((res) => {
         console.log("New user added", res);
-
-        setButtonText('Odeslano');
+        setTimeout(() => {setButtonText('Odesláno')}, 2000); 
+        setButtonText('Odesílám...');
       
       // setIsPending(false);
       // history.push("/");
