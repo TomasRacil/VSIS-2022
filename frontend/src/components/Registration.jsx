@@ -58,19 +58,13 @@ const Registration = () => {
   
   function submitForm() {
     console.log(formValues);
-
-    
-    // fetch("/_api/person/")
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => console.log(data));
   }
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => { setIsOpen(!isOpen) };
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState (false);
   const [buttontext, setButtonText] = useState('Odeslat');
+  var chyba = false;
 
   useEffect (() => {
     console.log(formErrors);
@@ -83,20 +77,22 @@ const Registration = () => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if(!values.Firstname) {
       errors.Firstname = "Jméno je vyžadováno!";
+      chyba = true;
     }
     if(!values.Lastname) {
       errors.Lastname = "Přijmení je vyžadováno!";
+      chyba = true;
     }
     if(!values.Email) {
       errors.Email = "Email je vyžadován!";
-    // }
-    //  else if (!regex.test(values.Email)) {
-    //   errors.Email = "This is not a valid email format!";//
+      chyba = true;
      }
     if(!values.ClubName) {
       errors.ClubName = "Jméno klubu je vyžadováno!";
+      chyba = true;
     }
     return errors;
+    
   })
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -115,10 +111,11 @@ const Registration = () => {
         },
         body: JSON.stringify(person),
       }).then((res) => {
+        if (chyba = false) {
         console.log("New user added", res);
         setTimeout(() => {setButtonText('Odesláno')}, 2000); 
         setButtonText('Odesílám...');
-      
+        }
       // setIsPending(false);
       // history.push("/");
     });
@@ -143,6 +140,7 @@ const Registration = () => {
           onChange={handleChange}
         />
       </Form.Group>
+      <p>{formErrors.Firstname}</p>
       <Form.Group>
         <Form.Label></Form.Label>
         <Form.Control
@@ -154,6 +152,7 @@ const Registration = () => {
           onChange={handleChange}
         />
       </Form.Group>
+      <p>{formErrors.Lastname}</p>
       <Form.Group>
         <Form.Label></Form.Label>
         <Form.Control
@@ -174,6 +173,7 @@ const Registration = () => {
           onChange={handleChange}
         />
       </Form.Group>
+      <p>{formErrors.Email}</p>
       <Form.Group>
         <Form.Label></Form.Label>
         <Form.Control
@@ -184,6 +184,7 @@ const Registration = () => {
           onChange={handleChange}
         />
       </Form.Group>
+      <p>{formErrors.ClubName}</p>
       <Form.Group>
       <Form.Label><h3>Výběr trasy, jídla a trička</h3></Form.Label>
         <Form.Select name="Route" onChange={handleChange} value={formValues.Route}>
