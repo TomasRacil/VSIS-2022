@@ -1,5 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import Popup from './Popup';
 //import Dropdown from "./Dropdown";
 
 const Registration = () => {
@@ -63,6 +64,9 @@ const Registration = () => {
     //   .then((data) => console.log(data));
   }
 
+  const [isOpen, setIsOpen] = useState(false);
+  const togglePopup = () => { setIsOpen(!isOpen) };
+
   const handleSubmit = () => {
     // e.preventDefault();
     // const user = { email, username, password };
@@ -77,6 +81,7 @@ const Registration = () => {
       body: JSON.stringify(person),
     }).then((res) => {
       console.log("New user added", res);
+      
       // setIsPending(false);
       // history.push("/");
     });
@@ -170,6 +175,21 @@ const Registration = () => {
         <Button variant="primary" onClick={handleSubmit}>
           Odeslat
         </Button>
+      </Form.Group>
+      <Form.Group>
+      <input
+      type="button"
+      value="Testovací Pop-up okno"
+      onClick={togglePopup}
+    />
+    {isOpen && <Popup
+      content={<>
+        <b>CHYBA</b>
+        <p>Nevyplnili jste všechna povinná pole registračního formuláře. </p>
+        <button>zavřít</button>
+      </>}
+      handleClose={togglePopup}
+    />}
       </Form.Group>
     </Form>
   );

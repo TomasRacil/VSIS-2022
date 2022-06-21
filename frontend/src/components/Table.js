@@ -17,14 +17,14 @@ function GlobalFilter({
 
   return (
     <span>
-      Search:{' '}
+      Vyhledat:{' '}
       <input
         value={value || ""}
         onChange={e => {
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        placeholder={`${count} records...`}
+        placeholder={`${count} záznamy...`}
       />
     </span>
   )
@@ -59,7 +59,7 @@ function Table({ columns, data }) {
           ) : null
         )
       )}
-    <table {...getTableProps()} border="1">
+    <table {...getTableProps()} border="2" cellPadding={10}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -117,7 +117,7 @@ export function SelectColumnFilter({
       setFilter(e.target.value || undefined);
     }}
   >
-    <option value="">All</option>
+    <option value="">Všechny</option>
     {options.map((option, i) => (
       <option key={i} value={option}>
         {option}

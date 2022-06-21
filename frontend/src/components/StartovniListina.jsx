@@ -16,20 +16,22 @@ const StartovniListina = () => {
     {
       Header: "Příjmení",
       accessor: "last_name",
+      Filter: SelectColumnFilter,
+      filter: "include",
     },
     {
       Header: "Klub",
       accessor: "club_name",
+      Filter: SelectColumnFilter,
+      filter: "include",
     },
     {
-      Header: "Ročník",
+      Header: "Datum narození",
       accessor: "birth_date",
     },
     {
-      Header: "Trasa",
-      accessor: "route",
-      Filter: SelectColumnFilter,
-      filter: "includes",
+      Header: "E-mail",
+      accessor: "email",
     },
   ];
 
