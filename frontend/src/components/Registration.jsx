@@ -64,7 +64,8 @@ const Registration = () => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState (false);
   const [buttontext, setButtonText] = useState('Odeslat');
-  var chyba = false;
+  //var chyba = false;
+  var PopupEnable = false;
 
   useEffect (() => {
     console.log(formErrors);
@@ -77,20 +78,24 @@ const Registration = () => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if(!values.Firstname) {
       errors.Firstname = "Jméno je vyžadováno!";
-      chyba = true;
-    }
+      //chyba = true;
+    } 
+    //else (chyba = false);
     if(!values.Lastname) {
       errors.Lastname = "Přijmení je vyžadováno!";
-      chyba = true;
-    }
+      //chyba = true;
+    } 
+    //else (chyba = false);
     if(!values.Email) {
       errors.Email = "Email je vyžadován!";
-      chyba = true;
-     }
+      //chyba = true;
+     } 
+     //else (chyba = false);
     if(!values.ClubName) {
       errors.ClubName = "Jméno klubu je vyžadováno!";
-      chyba = true;
-    }
+      //chyba = true;
+    } 
+    //else (chyba = false);
     return errors;
     
   })
@@ -98,11 +103,7 @@ const Registration = () => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-      // e.preventDefault();
-      // const user = { email, username, password };
-      
-      // setIsPending(true);
-      
+    //if (chyba = false) {
       const person = changeNaming();
       fetch("/_api/person/", {
         method: "POST",
@@ -111,14 +112,12 @@ const Registration = () => {
         },
         body: JSON.stringify(person),
       }).then((res) => {
-        if (chyba = false) {
         console.log("New user added", res);
         setTimeout(() => {setButtonText('Odesláno')}, 2000); 
         setButtonText('Odesílám...');
-        }
-      // setIsPending(false);
-      // history.push("/");
-    });
+        })
+    //}
+        //else (PopupEnable = true);
   };
 
   return (
@@ -217,19 +216,21 @@ const Registration = () => {
         </Button>
       </Form.Group>
       <Form.Group>
-      <input
-      type="button"
-      value="Testovací Pop-up okno"
-      onClick={togglePopup}
-    />
-    {isOpen && <Popup
-      content={<>
-        <b>CHYBA</b>
-        <p>Nevyplnili jste všechna povinná pole registračního formuláře. </p>
-        <button>zavřít</button>
-      </>}
-      handleClose={togglePopup}
-    />}
+        <input
+        type="button"
+        value={buttontext}
+        onClick={() => {
+          togglePopup(); //s funkcí hadlesubmit se to pralo a nespustilo
+        }}
+        />
+        {isOpen && <Popup
+          content={<>
+            <b>CHYBA</b>
+            <p>Nevyplnili jste všechna povinná pole registračního formuláře. </p>
+            <button>zavřít</button>
+          </>}
+          handleClose={togglePopup}
+        />}
       </Form.Group>
     </Form>
   );
