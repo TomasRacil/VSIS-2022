@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+//import { history } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
-import Popup from './Popup';
+import Popup from "./Popup";
 //import Dropdown from "./Dropdown";
 
 const Registration = () => {
@@ -40,7 +41,8 @@ const Registration = () => {
     const { name, value } = e.target;
     setformValues({ ...formValues, [name]: value });
   };
-   
+  const [isPending, setIsPending] = useState(false);
+
   function changeNaming() {
     const person = {
       first_name: formValues.Firstname,
@@ -55,54 +57,60 @@ const Registration = () => {
     return person;
   }
 
-  
-  function submitForm() {
-    console.log(formValues);
-  }
+  // function submitForm() {
+  //   console.log(formValues);
+  // }
   const [isOpen, setIsOpen] = useState(false);
-  const togglePopup = () => { setIsOpen(!isOpen) };
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+    setIsPending(false);
+  };
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState (false);
-  const [buttontext, setButtonText] = useState('Odeslat');
-  var chyba = false;
+  //const [isSubmit, setIsSubmit] = useState(false);
+  const [buttontext, setButtonText] = useState("Odeslat");
+  //var chyba = false;
 
-  useEffect (() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).lenght === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  }, [formErrors]);
-  const validate = (values => {
+  // useEffect(() => {
+  //   //console.log(formErrors);
+  //   if (Object.keys(formErrors).lenght === 0 && isSubmit) {
+  //     console.log(formValues);
+  //   }
+  // }, [formErrors]);
+  const validate = (values) => {
     const errors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    if(!values.Firstname) {
+    //const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.Firstname) {
       errors.Firstname = "Jméno je vyžadováno!";
-      chyba = true;
+      //chyba = true;
     }
-    if(!values.Lastname) {
+    if (!values.Lastname) {
       errors.Lastname = "Přijmení je vyžadováno!";
-      chyba = true;
+      //chyba = true;
     }
-    if(!values.Email) {
+    if (!values.Email) {
       errors.Email = "Email je vyžadován!";
-      chyba = true;
-     }
-    if(!values.ClubName) {
-      errors.ClubName = "Jméno klubu je vyžadováno!";
-      chyba = true;
+      //chyba = true;
     }
+    if (!values.ClubName) {
+      errors.ClubName = "Jméno klubu je vyžadováno!";
+      //chyba = true;
+    }
+    //console.log(values);
+    //console.log(errors);
+    //console.log(!values.ClubName);
     return errors;
-    
-  })
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
-    setIsSubmit(true);
-      // e.preventDefault();
-      // const user = { email, username, password };
-      
-      // setIsPending(true);
-      
+    setIsPending(true);
+    //setIsSubmit(true);
+    var err = validate(formValues);
+    setFormErrors(err);
+    //console.log(formErrors, err);
+    //console.log(Object.keys(formErrors).length);
+    if (Object.keys(err).length !== 0) {
+      togglePopup();
+    } else {
       const person = changeNaming();
       fetch("/_api/person/", {
         method: "POST",
@@ -111,14 +119,17 @@ const Registration = () => {
         },
         body: JSON.stringify(person),
       }).then((res) => {
-        if (chyba = false) {
+        //if ((chyba = false)) {
         console.log("New user added", res);
-        setTimeout(() => {setButtonText('Odesláno')}, 2000); 
-        setButtonText('Odesílám...');
-        }
-      // setIsPending(false);
-      // history.push("/");
-    });
+        setTimeout(() => {
+          setButtonText("Odesláno");
+        }, 2000);
+
+        //}
+        setIsPending(false);
+        //history.push("/");
+      });
+    }
   };
 
   return (
@@ -129,7 +140,9 @@ const Registration = () => {
       {/* {values.Route} */}
       <br />
       <Form.Group>
-      <Form.Label><h3>Základní údaje</h3></Form.Label>
+        <Form.Label>
+          <h3>Základní údaje</h3>
+        </Form.Label>
         <Form.Label></Form.Label>
         <Form.Control
           type="text"
@@ -186,16 +199,26 @@ const Registration = () => {
       </Form.Group>
       <p>{formErrors.ClubName}</p>
       <Form.Group>
-      <Form.Label><h3>Výběr trasy, jídla a trička</h3></Form.Label>
-        <Form.Select name="Route" onChange={handleChange} value={formValues.Route}>
+        <Form.Label>
+          <h3>Výběr trasy, jídla a trička</h3>
+        </Form.Label>
+        <Form.Select
+          name="Route"
+          onChange={handleChange}
+          value={formValues.Route}
+        >
           {routes.map((option) => (
             <option value={option.value}>{option.label}</option>
           ))}
         </Form.Select>
       </Form.Group>
       <Form.Group>
-      <Form.Label></Form.Label>
-        <Form.Select name="Food" onChange={handleChange} value={formValues.Food}>
+        <Form.Label></Form.Label>
+        <Form.Select
+          name="Food"
+          onChange={handleChange}
+          value={formValues.Food}
+        >
           {foods.map((option) => (
             <option value={option.value}>{option.label}</option>
           ))}
@@ -204,7 +227,11 @@ const Registration = () => {
       </Form.Group>
       <Form.Label></Form.Label>
       <Form.Group>
-        <Form.Select name="Shirt" onChange={handleChange} value={formValues.Shirt}>
+        <Form.Select
+          name="Shirt"
+          onChange={handleChange}
+          value={formValues.Shirt}
+        >
           {shirts.map((option) => (
             <option value={option.value}>{option.label}</option>
           ))}
@@ -212,24 +239,30 @@ const Registration = () => {
         {/* {values.Shirt} */}
       </Form.Group>
       <Form.Group>
-        <Button variant="primary" onClick={handleSubmit}>
+        <Button variant="primary" onClick={handleSubmit} disabled={isPending}>
           {buttontext}
         </Button>
       </Form.Group>
       <Form.Group>
-      <input
-      type="button"
-      value="Testovací Pop-up okno"
-      onClick={togglePopup}
-    />
-    {isOpen && <Popup
-      content={<>
-        <b>CHYBA</b>
-        <p>Nevyplnili jste všechna povinná pole registračního formuláře. </p>
-        <button>zavřít</button>
-      </>}
-      handleClose={togglePopup}
-    />}
+        {/* <input
+          type="button"
+          value="Testovací Pop-up okno"
+          onClick={togglePopup}
+        /> */}
+        {isOpen && (
+          <Popup
+            content={
+              <>
+                <b>CHYBA</b>
+                <p>
+                  Nevyplnili jste všechna povinná pole registračního formuláře.{" "}
+                </p>
+                <button onClick={togglePopup}>zavřít</button>
+              </>
+            }
+            // handleClose={togglePopup}
+          />
+        )}
       </Form.Group>
     </Form>
   );
