@@ -1,4 +1,7 @@
 import re
+import string
+
+from sqlalchemy import null
 from app.main import db
 from app.main.model.person import Person
 import datetime
@@ -10,6 +13,12 @@ def create_new_person(data):
     # pattern=r'^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$'
     # print(re.search(pattern,data['email']))
     # if bool(re.search(pattern, data['email'])):
+    for key,value in data.items():
+        if type(value)==string:
+            if len(value)==0:
+                print(key,value)
+                data[key]=null
+    print(data)
     if True:
         new_person = Person(
             first_name=data['first_name'],
